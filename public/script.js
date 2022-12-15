@@ -8,7 +8,5 @@ btnDownload.addEventListener("click", async () => {
     a.href = window.URL.createObjectURL(data);
     a.download = "get.txt";
     a.click();
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 });
