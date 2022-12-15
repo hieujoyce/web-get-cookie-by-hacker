@@ -47,8 +47,10 @@ app.get("/get", async (req, res) => {
     const content = `[${getTime()}]: ${cookie}\n`;
     await fs.writeFile(pathName, content, { flag: "a+" });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
-      err: "Lỗi server.",
+      msg: "Lỗi server.",
+      err: err,
     });
   }
   res.json({
