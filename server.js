@@ -11,19 +11,19 @@ app.use(cors());
 app.use(express.static(publicPath));
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   let data;
-  // try {
-  //   const pathName = path.join(__dirname, "get.txt");
-  //   data = await fs.readFile(pathName, { encoding: "utf8" });
-  //   data = data
-  //     .split("\n")
-  //     .filter((el) => el !== "")
-  //     .map((el) => {
-  //       const [time, cookie] = el.slice(1, el.length).split("]: ");
-  //       return { time, cookie };
-  //     });
-  // } catch (err) {}
+  try {
+    const pathName = path.join(__dirname, "get.txt");
+    data = await fs.readFile(pathName, { encoding: "utf8" });
+    data = data
+      .split("\n")
+      .filter((el) => el !== "")
+      .map((el) => {
+        const [time, cookie] = el.slice(1, el.length).split("]: ");
+        return { time, cookie };
+      });
+  } catch (err) {}
   res.render("index", {
     cookieList: data || [],
   });
