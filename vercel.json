@@ -8,8 +8,16 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/get",
       "dest": "/server.js"
+    },
+    {
+      "src": "/download",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/",
+      "dest": "view/index"
     }
   ]
 }
