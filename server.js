@@ -24,6 +24,8 @@ app.get("/", async (req, res) => {
         return { time, cookie };
       });
   } catch (err) {}
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=60, stale-while-revalidate");
   res.render("index", {
     cookieList: data || [],
   });

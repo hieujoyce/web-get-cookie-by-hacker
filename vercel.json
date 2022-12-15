@@ -17,7 +17,7 @@
     },
     {
       "src": "/",
-      "dest": "view/index"
+      "dest": "/server.js"
     }
   ]
 }
