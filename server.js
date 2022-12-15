@@ -10,6 +10,7 @@ const publicPath = path.join(__dirname, "public");
 app.use(cors());
 app.use(express.static(publicPath));
 app.set("view engine", "ejs");
+app.set("server/views", path.join(__dirname, "views"));
 
 app.get("/", async (req, res) => {
   let data;
